@@ -15,7 +15,7 @@ int lis(int start) {
 
 	//At lesat S[start]'s length is 1
 	ret = 1;
-	for (int next = start + 1; next < (n + m - 1); ++next) {
+	for (int next = start + 1; next < (n + m); ++next) {
 		if (start == -1 || S[start] < S[next]) {
 			ret = max(ret, lis(next) + 1);
 		}
@@ -67,14 +67,15 @@ int main() {
 		ab.insert(ab.end(), b.begin(), b.end());
 		resetSubsequence(ab);
 
-		int res1 = lis(-1);
+		//As start for S[-1] = -INF, length should reduced to 1
+		int res1 = lis(-1) - 1;
 
 		
 		ab = b;
 		ab.insert(ab.end(), a.begin(), a.end());
 		resetSubsequence(ab);
 
-		int res2 = lis(-1);
+		int res2 = lis(-1) - 1;
 
 		ans.push_back(max(res1, res2));
 	}
